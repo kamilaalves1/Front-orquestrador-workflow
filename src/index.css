@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 250 250 255;
+    --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -17,9 +17,9 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 245 70% 50%;
+    --primary: 215 100% 45%;
     --primary-foreground: 0 0% 98%;
-    --primary-glow: 245 100% 70%;
+    --primary-glow: 215 100% 55%;
 
     --secondary: 220 14.3% 95.9%;
     --secondary-foreground: 220.9 39.3% 11%;
@@ -36,27 +36,27 @@ All colors MUST be HSL.
     --success: 142 76% 36%;
     --success-foreground: 0 0% 98%;
 
-    --warning: 48 96% 53%;
-    --warning-foreground: 222.2 84% 4.9%;
+    --warning: 45 100% 47%;
+    --warning-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 245 70% 50%;
+    --ring: 215 100% 45%;
 
     /* Workflow Colors */
-    --workflow-bg: 245 15% 98%;
-    --workflow-border: 245 10% 92%;
+    --workflow-bg: 0 0% 99%;
+    --workflow-border: 220 13% 91%;
     
     /* ELO Brand Colors */
-    --elo-primary: 215 100% 50%;
-    --elo-secondary: 215 100% 60%;
-    --elo-accent: 45 100% 50%;
+    --elo-primary: 215 100% 45%;
+    --elo-secondary: 215 100% 55%;
+    --elo-accent: 202 100% 50%;
     
     /* Node Colors */
     --node-input: 142 76% 36%;
-    --node-bureau: 245 70% 50%;
-    --node-condition: 48 96% 53%;
-    --node-output: 0 84.2% 60.2%;
+    --node-bureau: 215 100% 45%;
+    --node-condition: 45 100% 47%;
+    --node-output: 0 84% 60%;
     --node-assignment: 280 100% 70%;
 
     /* Gradients */
