@@ -89,11 +89,11 @@ export const WorkflowBuilder = () => {
 
   const getDefaultLabel = (type: string): string => {
     switch (type) {
-      case 'bureau': return 'Bureau Service';
-      case 'condition': return 'Condition';
-      case 'assignment': return 'Variable Assignment';
-      case 'output': return 'Output';
-      default: return 'Node';
+      case 'bureau': return 'Serviço Bureau';
+      case 'condition': return 'Condição';
+      case 'assignment': return 'Atribuição de Variável';
+      case 'output': return 'Saída';
+      default: return 'Nó';
     }
   };
 

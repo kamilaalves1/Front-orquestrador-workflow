@@ -29,8 +29,8 @@ import {
 const workflows = [
   {
     id: '1',
-    name: 'KYC Validation Workflow',
-    description: 'Complete KYC validation using multiple bureaus',
+    name: 'Workflow de Validação KYC',
+    description: 'Validação KYC completa usando múltiplos bureaus',
     status: 'active',
     version: '2.1.0',
     nodes: 8,
@@ -38,14 +38,14 @@ const workflows = [
     executions: 1247,
     successRate: 94.2,
     avgDuration: '2.3s',
-    lastModified: '2 hours ago',
-    createdBy: 'Jose Luis',
-    tags: ['kyc', 'validation', 'high-priority']
+    lastModified: '2 horas atrás',
+    createdBy: 'José Luis',
+    tags: ['kyc', 'validação', 'alta-prioridade']
   },
   {
     id: '2',
-    name: 'Credit Risk Assessment',
-    description: 'Multi-bureau credit scoring and risk evaluation',
+    name: 'Avaliação de Risco de Crédito',
+    description: 'Score de crédito multi-bureau e avaliação de risco',
     status: 'active',
     version: '1.5.2',
     nodes: 12,
@@ -53,14 +53,14 @@ const workflows = [
     executions: 892,
     successRate: 91.8,
     avgDuration: '4.1s',
-    lastModified: '1 day ago',
+    lastModified: '1 dia atrás',
     createdBy: 'Maria Silva',
-    tags: ['credit', 'scoring', 'risk']
+    tags: ['crédito', 'score', 'risco']
   },
   {
     id: '3',
-    name: 'Document Verification',
-    description: 'OCR and document validation pipeline',
+    name: 'Verificação de Documento',
+    description: 'Pipeline de OCR e validação de documentos',
     status: 'draft',
     version: '0.8.0',
     nodes: 6,
@@ -68,14 +68,14 @@ const workflows = [
     executions: 0,
     successRate: 0,
     avgDuration: '-',
-    lastModified: '3 days ago',
+    lastModified: '3 dias atrás',
     createdBy: 'Carlos Roberto',
-    tags: ['document', 'ocr', 'validation']
+    tags: ['documento', 'ocr', 'validação']
   },
   {
     id: '4',
-    name: 'Phone Number Validation',
-    description: 'Telesign and Prove integration for phone verification',
+    name: 'Validação de Número de Telefone',
+    description: 'Integração Telesign e Prove para verificação telefônica',
     status: 'inactive',
     version: '1.2.1',
     nodes: 4,
@@ -83,9 +83,9 @@ const workflows = [
     executions: 234,
     successRate: 98.7,
     avgDuration: '1.1s',
-    lastModified: '1 week ago',
+    lastModified: '1 semana atrás',
     createdBy: 'Ana Costa',
-    tags: ['phone', 'sms', 'validation']
+    tags: ['telefone', 'sms', 'validação']
   }
 ];
 
@@ -97,11 +97,11 @@ export const WorkflowList = () => {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'active':
-        return <Badge className="bg-success text-success-foreground">Active</Badge>;
+        return <Badge className="bg-success text-success-foreground">Ativo</Badge>;
       case 'inactive':
-        return <Badge variant="secondary">Inactive</Badge>;
+        return <Badge variant="secondary">Inativo</Badge>;
       case 'draft':
-        return <Badge className="bg-warning text-warning-foreground">Draft</Badge>;
+        return <Badge className="bg-warning text-warning-foreground">Rascunho</Badge>;
       default:
         return <Badge variant="outline">{status}</Badge>;
     }
@@ -124,12 +124,12 @@ export const WorkflowList = () => {
         <div>
           <h2 className="text-2xl font-bold">Workflows</h2>
           <p className="text-muted-foreground">
-            Manage and monitor your fraud prevention workflows
+            Gerencie e monitore seus workflows de prevenção à fraude
           </p>
         </div>
         <Button>
           <Plus className="w-4 h-4 mr-2" />
-          New Workflow
+          Novo Workflow
         </Button>
       </div>
 
@@ -140,7 +140,7 @@ export const WorkflowList = () => {
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <Input
-                placeholder="Search workflows..."
+                placeholder="Buscar workflows..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
@@ -153,10 +153,10 @@ export const WorkflowList = () => {
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="active">Active</SelectItem>
-                <SelectItem value="inactive">Inactive</SelectItem>
-                <SelectItem value="draft">Draft</SelectItem>
+                <SelectItem value="all">Todos os Status</SelectItem>
+                <SelectItem value="active">Ativo</SelectItem>
+                <SelectItem value="inactive">Inativo</SelectItem>
+                <SelectItem value="draft">Rascunho</SelectItem>
               </SelectContent>
             </Select>
 
@@ -165,10 +165,10 @@ export const WorkflowList = () => {
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="lastModified">Last Modified</SelectItem>
-                <SelectItem value="name">Name</SelectItem>
-                <SelectItem value="executions">Executions</SelectItem>
-                <SelectItem value="successRate">Success Rate</SelectItem>
+                <SelectItem value="lastModified">Última Modificação</SelectItem>
+                <SelectItem value="name">Nome</SelectItem>
+                <SelectItem value="executions">Execuções</SelectItem>
+                <SelectItem value="successRate">Taxa de Sucesso</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -208,20 +208,20 @@ export const WorkflowList = () => {
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem>
                       <Edit className="h-4 w-4 mr-2" />
-                      Edit
+                      Editar
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <Copy className="h-4 w-4 mr-2" />
-                      Duplicate
+                      Duplicar
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <Play className="h-4 w-4 mr-2" />
-                      Test Run
+                      Executar Teste
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem className="text-destructive">
                       <Trash2 className="h-4 w-4 mr-2" />
-                      Delete
+                      Excluir
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -233,17 +233,17 @@ export const WorkflowList = () => {
                 <div className="space-y-1">
                   <div className="flex items-center text-sm text-muted-foreground">
                     <GitBranch className="w-4 h-4 mr-1" />
-                    Structure
+                    Estrutura
                   </div>
                   <div className="text-sm font-medium">
-                    {workflow.nodes} nodes, {workflow.connections} connections
+                    {workflow.nodes} nós, {workflow.connections} conexões
                   </div>
                 </div>
                 
                 <div className="space-y-1">
                   <div className="flex items-center text-sm text-muted-foreground">
                     <Play className="w-4 h-4 mr-1" />
-                    Executions
+                    Execuções
                   </div>
                   <div className="text-sm font-medium">
                     {workflow.executions.toLocaleString()}
@@ -251,7 +251,7 @@ export const WorkflowList = () => {
                 </div>
                 
                 <div className="space-y-1">
-                  <div className="text-sm text-muted-foreground">Success Rate</div>
+                  <div className="text-sm text-muted-foreground">Taxa de Sucesso</div>
                   <div className="text-sm font-medium">
                     {workflow.successRate > 0 ? `${workflow.successRate}%` : '-'}
                   </div>
@@ -260,7 +260,7 @@ export const WorkflowList = () => {
                 <div className="space-y-1">
                   <div className="flex items-center text-sm text-muted-foreground">
                     <Clock className="w-4 h-4 mr-1" />
-                    Avg Duration
+                    Duração Média
                   </div>
                   <div className="text-sm font-medium">{workflow.avgDuration}</div>
                 </div>
@@ -269,24 +269,24 @@ export const WorkflowList = () => {
               <div className="flex items-center justify-between mt-4 pt-4 border-t">
                 <div className="flex items-center text-sm text-muted-foreground">
                   <Calendar className="w-4 h-4 mr-1" />
-                  Modified {workflow.lastModified} by {workflow.createdBy}
+                  Modificado {workflow.lastModified} por {workflow.createdBy}
                 </div>
                 
                 <div className="flex gap-2">
                   {workflow.status === 'active' ? (
                     <Button size="sm" variant="outline">
                       <Pause className="w-4 h-4 mr-1" />
-                      Pause
+                      Pausar
                     </Button>
                   ) : (
                     <Button size="sm">
                       <Play className="w-4 h-4 mr-1" />
-                      Activate
+                      Ativar
                     </Button>
                   )}
                   <Button size="sm" variant="outline">
                     <Edit className="w-4 h-4 mr-1" />
-                    Edit
+                    Editar
                   </Button>
                 </div>
               </div>
@@ -300,16 +300,16 @@ export const WorkflowList = () => {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <div className="text-muted-foreground text-center">
               <GitBranch className="w-12 h-12 mx-auto mb-4 opacity-50" />
-              <h3 className="text-lg font-medium mb-2">No workflows found</h3>
+              <h3 className="text-lg font-medium mb-2">Nenhum workflow encontrado</h3>
               <p className="text-sm mb-4">
                 {searchTerm || statusFilter !== 'all' 
-                  ? 'Try adjusting your search or filters'
-                  : 'Create your first workflow to get started'
+                  ? 'Tente ajustar sua busca ou filtros'
+                  : 'Crie seu primeiro workflow para começar'
                 }
               </p>
               <Button>
                 <Plus className="w-4 h-4 mr-2" />
-                New Workflow
+                Novo Workflow
               </Button>
             </div>
           </CardContent>

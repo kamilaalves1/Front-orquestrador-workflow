@@ -35,7 +35,7 @@ export const BaseNode = memo(({
   };
 
   return (
-    <Card className={`min-w-[200px] p-0 border-2 border-border hover:border-primary transition-all duration-200 ${className}`}>
+    <Card className={`min-w-[160px] p-0 border-2 border-border hover:border-primary transition-all duration-200 ${className}`}>
       {showHandles && (
         <>
           <Handle

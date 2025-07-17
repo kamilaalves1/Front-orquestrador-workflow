@@ -21,13 +21,20 @@ import { WorkflowBuilder } from './WorkflowBuilder';
 import { WorkflowList } from './WorkflowList';
 import { ExecutionReports } from './ExecutionReports';
 import { BureauManagement } from './BureauManagement';
+import { ExecutionLogs } from './ExecutionLogs';
+import { WorkflowApproval } from './WorkflowApproval';
+import { NewWorkflowDialog } from './NewWorkflowDialog';
+import eloLogo from '@/assets/elo-logo.png';
+import { useToast } from '@/hooks/use-toast';
 
 export const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
 
+  const { toast } = useToast();
+
   const stats = [
     {
-      title: 'Active Workflows',
+      title: 'Workflows Ativos',
       value: '12',
       change: '+2',
       trend: 'up',
@@ -35,15 +42,15 @@ export const Dashboard = () => {
       color: 'text-primary'
     },
     {
-      title: 'Executions Today',
-      value: '1,247',
+      title: 'Execuções Hoje',
+      value: '1.247',
       change: '+15%',
       trend: 'up',
       icon: Play,
       color: 'text-success'
     },
     {
-      title: 'Success Rate',
+      title: 'Taxa de Sucesso',
       value: '94.2%',
       change: '+1.2%',
       trend: 'up',
@@ -51,7 +58,7 @@ export const Dashboard = () => {
       color: 'text-success'
     },
     {
-      title: 'Avg Processing Time',
+      title: 'Tempo Médio',
       value: '2.3s',
       change: '-0.1s',
       trend: 'down',
@@ -63,34 +70,34 @@ export const Dashboard = () => {
   const recentExecutions = [
     {
       id: '1',
-      workflowName: 'KYC Validation',
+      workflowName: 'Validação KYC',
       status: 'completed',
       duration: '1.8s',
-      timestamp: '2 min ago',
+      timestamp: '2 min atrás',
       result: 'approved'
     },
     {
       id: '2',
-      workflowName: 'Credit Scoring',
+      workflowName: 'Score de Crédito',
       status: 'completed',
       duration: '3.2s',
-      timestamp: '5 min ago',
+      timestamp: '5 min atrás',
       result: 'rejected'
     },
     {
       id: '3',
-      workflowName: 'Document Verification',
+      workflowName: 'Verificação de Documento',
       status: 'running',
       duration: '1.1s',
-      timestamp: '1 min ago',
+      timestamp: '1 min atrás',
       result: 'pending'
     },
     {
       id: '4',
-      workflowName: 'Phone Validation',
+      workflowName: 'Validação de Telefone',
       status: 'completed',
       duration: '0.9s',
-      timestamp: '3 min ago',
+      timestamp: '3 min atrás',
       result: 'approved'
     }
   ];
@@ -106,11 +113,25 @@ export const Dashboard = () => {
 
   const getResultBadge = (result: string) => {
     switch (result) {
-      case 'approved': return <Badge className="bg-success text-success-foreground">Approved</Badge>;
-      case 'rejected': return <Badge className="bg-destructive text-destructive-foreground">Rejected</Badge>;
-      case 'pending': return <Badge className="bg-warning text-warning-foreground">Pending</Badge>;
+      case 'approved': return <Badge className="bg-success text-success-foreground">Aprovado</Badge>;
+      case 'rejected': return <Badge className="bg-destructive text-destructive-foreground">Rejeitado</Badge>;
+      case 'pending': return <Badge className="bg-warning text-warning-foreground">Pendente</Badge>;
       default: return <Badge variant="outline">{result}</Badge>;
     }
+  };
+
+  const handleNewWorkflow = (workflow: any) => {
+    toast({
+      title: 'Workflow Criado',
+      description: `Workflow "${workflow.name}" criado com sucesso!`,
+    });
+  };
+
+  const handleSettings = () => {
+    toast({
+      title: 'Configurações',
+      description: 'Abrindo configurações do sistema...',
+    });
   };
 
   return (
@@ -118,21 +139,21 @@ export const Dashboard = () => {
       <div className="border-b bg-card">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold">Anti-Fraud Orchestrator</h1>
-              <p className="text-muted-foreground">
-                Manage and orchestrate your fraud prevention workflows
-              </p>
+            <div className="flex items-center gap-4">
+              <img src={eloLogo} alt="ELO" className="h-8 w-auto" />
+              <div>
+                <h1 className="text-2xl font-bold">Orquestrador Antifraude</h1>
+                <p className="text-muted-foreground">
+                  Gerencie e orquestre seus workflows de prevenção à fraude
+                </p>
+              </div>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline">
+              <Button variant="outline" onClick={handleSettings}>
                 <Settings className="w-4 h-4 mr-2" />
-                Settings
+                Configurações
               </Button>
-              <Button>
-                <Plus className="w-4 h-4 mr-2" />
-                New Workflow
-              </Button>
+              <NewWorkflowDialog onWorkflowCreated={handleNewWorkflow} />
             </div>
           </div>
         </div>
@@ -140,10 +161,10 @@ export const Dashboard = () => {
 
       <div className="container mx-auto px-6 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BarChart3 className="w-4 h-4" />
-              Overview
+              Visão Geral
             </TabsTrigger>
             <TabsTrigger value="workflows" className="flex items-center gap-2">
               <Workflow className="w-4 h-4" />
@@ -151,11 +172,19 @@ export const Dashboard = () => {
             </TabsTrigger>
             <TabsTrigger value="builder" className="flex items-center gap-2">
               <Plus className="w-4 h-4" />
-              Builder
+              Construtor
             </TabsTrigger>
             <TabsTrigger value="reports" className="flex items-center gap-2">
               <FileText className="w-4 h-4" />
-              Reports
+              Relatórios
+            </TabsTrigger>
+            <TabsTrigger value="logs" className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              Logs
+            </TabsTrigger>
+            <TabsTrigger value="approvals" className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4" />
+              Aprovações
             </TabsTrigger>
             <TabsTrigger value="bureaus" className="flex items-center gap-2">
               <Users className="w-4 h-4" />
@@ -179,10 +208,10 @@ export const Dashboard = () => {
                     <CardContent>
                       <div className="text-2xl font-bold">{stat.value}</div>
                       <p className="text-xs text-muted-foreground">
-                        <span className={stat.trend === 'up' ? 'text-success' : 'text-destructive'}>
+                       <span className={stat.trend === 'up' ? 'text-success' : 'text-destructive'}>
                           {stat.change}
                         </span>{' '}
-                        from last period
+                        do período anterior
                       </p>
                     </CardContent>
                   </Card>
@@ -193,9 +222,9 @@ export const Dashboard = () => {
             {/* Recent Executions */}
             <Card>
               <CardHeader>
-                <CardTitle>Recent Executions</CardTitle>
+                <CardTitle>Execuções Recentes</CardTitle>
                 <CardDescription>
-                  Latest workflow executions and their results
+                  Últimas execuções de workflows e seus resultados
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -225,7 +254,8 @@ export const Dashboard = () => {
                           variant="outline"
                           className={getStatusColor(execution.status)}
                         >
-                          {execution.status}
+                          {execution.status === 'completed' ? 'Concluído' :
+                           execution.status === 'running' ? 'Executando' : 'Falhou'}
                         </Badge>
                       </div>
                     </div>
@@ -247,6 +277,14 @@ export const Dashboard = () => {
 
           <TabsContent value="reports" className="space-y-6">
             <ExecutionReports />
+          </TabsContent>
+
+          <TabsContent value="logs" className="space-y-6">
+            <ExecutionLogs />
+          </TabsContent>
+
+          <TabsContent value="approvals" className="space-y-6">
+            <WorkflowApproval />
           </TabsContent>
 
           <TabsContent value="bureaus" className="space-y-6">

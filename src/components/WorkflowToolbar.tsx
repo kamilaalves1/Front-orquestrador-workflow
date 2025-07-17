@@ -2,6 +2,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
 import { 
   Play, 
   Save, 
@@ -11,66 +12,90 @@ import {
   GitBranch,
   Zap,
   Target,
-  ArrowRight
+  ArrowRight,
+  Pause
 } from 'lucide-react';
 
 const nodeTypes = [
   {
     type: 'bureau',
-    label: 'Bureau Service',
+    label: 'Serviço Bureau',
     icon: Database,
     color: 'bg-node-bureau',
-    description: 'External bureau integration'
+    description: 'Integração de bureau externo'
   },
   {
     type: 'condition',
-    label: 'Condition',
+    label: 'Condição',
     icon: GitBranch,
     color: 'bg-node-condition',
-    description: 'Conditional logic'
+    description: 'Lógica condicional'
   },
   {
     type: 'assignment',
-    label: 'Assignment',
+    label: 'Atribuição',
     icon: Zap,
     color: 'bg-node-assignment',
-    description: 'Variable assignment'
+    description: 'Atribuição de variável'
   },
   {
     type: 'output',
-    label: 'Output',
+    label: 'Saída',
     icon: Target,
     color: 'bg-node-output',
-    description: 'Workflow output'
+    description: 'Saída do workflow'
   }
 ];
 
 export const WorkflowToolbar = () => {
+  const { toast } = useToast();
+  
   const onDragStart = (event: React.DragEvent, nodeType: string) => {
     event.dataTransfer.setData('application/reactflow', nodeType);
     event.dataTransfer.effectAllowed = 'move';
   };
 
+  const handleTest = () => {
+    toast({
+      title: 'Teste Iniciado',
+      description: 'Executando teste do workflow...',
+    });
+  };
+
+  const handleSave = () => {
+    toast({
+      title: 'Workflow Salvo',
+      description: 'Suas alterações foram salvas com sucesso.',
+    });
+  };
+
+  const handleSettings = () => {
+    toast({
+      title: 'Configurações',
+      description: 'Abrindo configurações do workflow...',
+    });
+  };
+
   return (
     <Card className="w-80 h-full rounded-none border-r border-border bg-card">
       <div className="p-6 border-b border-border">
-        <h2 className="text-lg font-semibold mb-2">Workflow Builder</h2>
+        <h2 className="text-lg font-semibold mb-2">Construtor de Workflow</h2>
         <p className="text-sm text-muted-foreground">
-          Drag and drop components to build your anti-fraud workflow
+          Arraste e solte componentes para construir seu workflow antifraude
         </p>
       </div>
 
       <div className="p-6">
         <div className="flex gap-2 mb-6">
-          <Button size="sm" className="flex-1">
+          <Button size="sm" className="flex-1" onClick={handleTest}>
             <Play className="w-4 h-4 mr-2" />
-            Test
+            Testar
           </Button>
-          <Button size="sm" variant="outline" className="flex-1">
+          <Button size="sm" variant="outline" className="flex-1" onClick={handleSave}>
             <Save className="w-4 h-4 mr-2" />
-            Save
+            Salvar
           </Button>
-          <Button size="sm" variant="outline">
+          <Button size="sm" variant="outline" onClick={handleSettings}>
             <Settings className="w-4 h-4" />
           </Button>
         </div>
@@ -79,7 +104,7 @@ export const WorkflowToolbar = () => {
           <div>
             <h3 className="font-medium mb-3 flex items-center">
               <FileText className="w-4 h-4 mr-2" />
-              Components
+              Componentes
             </h3>
             <div className="space-y-2">
               {nodeTypes.map((nodeType) => {
@@ -110,22 +135,22 @@ export const WorkflowToolbar = () => {
           <Separator />
 
           <div>
-            <h3 className="font-medium mb-3">Workflow Info</h3>
+            <h3 className="font-medium mb-3">Informações do Workflow</h3>
             <div className="space-y-3 text-sm">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Status:</span>
-                <Badge variant="secondary">Draft</Badge>
+                <Badge variant="secondary">Rascunho</Badge>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Version:</span>
+                <span className="text-muted-foreground">Versão:</span>
                 <span>1.0.0</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Nodes:</span>
+                <span className="text-muted-foreground">Nós:</span>
                 <span>1</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Connections:</span>
+                <span className="text-muted-foreground">Conexões:</span>
                 <span>0</span>
               </div>
             </div>
@@ -134,15 +159,15 @@ export const WorkflowToolbar = () => {
           <Separator />
 
           <div>
-            <h3 className="font-medium mb-3">Quick Actions</h3>
+            <h3 className="font-medium mb-3">Ações Rápidas</h3>
             <div className="space-y-2">
               <Button variant="outline" size="sm" className="w-full justify-start">
                 <FileText className="w-4 h-4 mr-2" />
-                Import Template
+                Importar Template
               </Button>
               <Button variant="outline" size="sm" className="w-full justify-start">
                 <Database className="w-4 h-4 mr-2" />
-                Manage Bureaus
+                Gerenciar Bureaus
               </Button>
             </div>
           </div>
