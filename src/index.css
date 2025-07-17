@@ -44,8 +44,13 @@ All colors MUST be HSL.
     --ring: 245 70% 50%;
 
     /* Workflow Colors */
-    --workflow-bg: 245 15% 97%;
-    --workflow-border: 245 10% 88%;
+    --workflow-bg: 245 15% 98%;
+    --workflow-border: 245 10% 92%;
+    
+    /* ELO Brand Colors */
+    --elo-primary: 215 100% 50%;
+    --elo-secondary: 215 100% 60%;
+    --elo-accent: 45 100% 50%;
     
     /* Node Colors */
     --node-input: 142 76% 36%;
