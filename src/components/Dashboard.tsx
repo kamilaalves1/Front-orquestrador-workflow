@@ -23,8 +23,9 @@ import { ExecutionReports } from './ExecutionReports';
 import { BureauManagement } from './BureauManagement';
 import { ExecutionLogs } from './ExecutionLogs';
 import { WorkflowApproval } from './WorkflowApproval';
+import { QueueManagement } from './QueueManagement';
 import { NewWorkflowDialog } from './NewWorkflowDialog';
-import eloLogo from '@/assets/elo-logo.png';
+import eloLogo from '@/assets/elo-logo-correct.png';
 import { useToast } from '@/hooks/use-toast';
 
 export const Dashboard = () => {
@@ -140,7 +141,7 @@ export const Dashboard = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <img src={eloLogo} alt="ELO" className="h-8 w-auto" />
+              <img src={eloLogo} alt="ELO" className="h-12 w-auto" />
               <div>
                 <h1 className="text-2xl font-bold">Orquestrador Antifraude</h1>
                 <p className="text-muted-foreground">
@@ -148,12 +149,18 @@ export const Dashboard = () => {
                 </p>
               </div>
             </div>
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={handleSettings}>
-                <Settings className="w-4 h-4 mr-2" />
-                Configurações
-              </Button>
-              <NewWorkflowDialog onWorkflowCreated={handleNewWorkflow} />
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Users className="h-4 w-4" />
+                <span>Usuário: <strong>João Silva (Operação)</strong></span>
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={handleSettings}>
+                  <Settings className="w-4 h-4 mr-2" />
+                  Configurações
+                </Button>
+                <NewWorkflowDialog onWorkflowCreated={handleNewWorkflow} />
+              </div>
             </div>
           </div>
         </div>
@@ -161,7 +168,7 @@ export const Dashboard = () => {
 
       <div className="container mx-auto px-6 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7">
+          <TabsList className="grid w-full grid-cols-8">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BarChart3 className="w-4 h-4" />
               Visão Geral
@@ -189,6 +196,10 @@ export const Dashboard = () => {
             <TabsTrigger value="bureaus" className="flex items-center gap-2">
               <Users className="w-4 h-4" />
               Bureaus
+            </TabsTrigger>
+            <TabsTrigger value="queue" className="flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4" />
+              Fila
             </TabsTrigger>
           </TabsList>
 
@@ -289,6 +300,10 @@ export const Dashboard = () => {
 
           <TabsContent value="bureaus" className="space-y-6">
             <BureauManagement />
+          </TabsContent>
+
+          <TabsContent value="queue" className="space-y-6">
+            <QueueManagement />
           </TabsContent>
         </Tabs>
       </div>
